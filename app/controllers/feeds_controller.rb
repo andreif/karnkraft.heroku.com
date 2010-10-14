@@ -14,7 +14,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
   '
   
   def index
-    @feeds = Feed.all
+    @feeds = Feed.all.sort_by(&:pubdate).reverse
     @sources = SOURCES
   end
   
