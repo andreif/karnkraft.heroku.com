@@ -11,7 +11,7 @@
     %b= link_to feed.title, feed.link
     = feed.pubdate
     <br/>
-    = raw feed.description.gsub('<![CDATA[','').gsub(']]>','')
+    = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
    
 %h4 Feed sources: 
 %ol
