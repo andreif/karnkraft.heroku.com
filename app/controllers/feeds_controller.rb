@@ -1,31 +1,9 @@
 class FeedsController < ApplicationController
   def index
     @feeds = Feed.all
-    
-    # rss
   end
   
-  
-  # def new
-  #   @feed = Feed.new
-  # end
-  
-  # def create
-  #   @feed = Feed.new(params[:feed])
-  #   if @feed.save
-  #     flash[:notice] = "Successfully created feed."
-  #     redirect_to @feed
-  #   else
-  #     render :action => 'new'
-  #   end
-  # end
-
-  
   def update
-    #ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
-    # ic = Iconv.new('US-ASCII', 'UTF-8')
-    #ic = Iconv.new('ISO-8859-1', 'UTF-8')
-    # ic = Iconv.new('ASCII-8BIT', 'UTF-8')
     clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
     @existed = Feed.all.collect(&:link)
     '
