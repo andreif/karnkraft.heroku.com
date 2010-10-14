@@ -1,15 +1,15 @@
 class FeedsController < ApplicationController
   SOURCES = '
-#DN http://www.dn.se/m/rss/toppnyheter
-#DN http://www.dn.se/ekonomi/m/rss
-#DI http://di.se/rss
-#SvD http://www.svd.se/opinion/startsidan/?service=rss
-#SvD http://www.svd.se/?service=rss&type=senastenytt
-#NyT http://www.nyteknik.se/?service=rss
-#SvT http://svt.se/rss/nyheter/lop/
-#TV4 http://tv4nyheterna.se/nyheter/rss
-#Aft http://www.aftonbladet.se/rss.xml
-#Exp http://expressen.se/rss/nyheter
+DN http://www.dn.se/m/rss/toppnyheter
+DN http://www.dn.se/ekonomi/m/rss
+DI http://di.se/rss
+SvD http://www.svd.se/opinion/startsidan/?service=rss
+SvD http://www.svd.se/?service=rss&type=senastenytt
+NyT http://www.nyteknik.se/?service=rss
+SvT http://svt.se/rss/nyheter/lop/
+TV4 http://tv4nyheterna.se/nyheter/rss
+Aft http://www.aftonbladet.se/rss.xml
+Exp http://expressen.se/rss/nyheter
 SvE http://www.svenskenergi.se/sv/system/RSS/
   '
   
