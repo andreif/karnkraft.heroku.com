@@ -11,5 +11,11 @@
     %b= link_to feed.title, feed.link
     = feed.pubdate
     <br/>
-    = #raw feed.description.gsub('<![CDATA[','').gsub(']]>','')
-    
+    = raw feed.description.gsub('<![CDATA[','').gsub(']]>','')
+   
+%h4 Feed sources: 
+%ol
+  - @sources.split.each_slice(2) do |a|
+    %li
+      = "%s: " % a.first
+      = link_to a.last, a.last
