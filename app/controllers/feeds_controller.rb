@@ -88,7 +88,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
     # else
     #   render :action => 'edit'
     # end
-    #redirect_to :controller => 'feeds', :action => 'index'
+    redirect_to :controller => 'feeds', :action => 'index'
   end
   
   def destroy
