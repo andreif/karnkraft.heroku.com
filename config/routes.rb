@@ -1,4 +1,11 @@
 Highflux::Application.routes.draw do
+  
+  
+  resources :feeds, :only => [:index, :update, :destroy]
+  get 'feeds/:action(.:format)' => 'feeds'
+  #get 'feeds/:action.:format' => 'feeds'
+  #get 'feeds/rss' => 
+  
   get "welcome/index"
 
   # The priority is based upon order of creation:

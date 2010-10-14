@@ -1,0 +1,15 @@
+- title "Kärnkraft Nyheter", false
+%h1
+  %a{:href => '/feeds/index.rss'}<
+    %img{:src => 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/24px-Feed-icon.svg.png'}
+  Kärnkraft Nyheter
+
+%p= link_to 'Update', '/feeds/update'
+
+- for feed in @feeds
+  %p
+    %b= link_to feed.title, feed.link
+    = feed.pubdate
+    <br/>
+    = raw feed.description.gsub('<![CDATA[','').gsub(']]>','')
+    
