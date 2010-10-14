@@ -10,15 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101014092900) do
+ActiveRecord::Schema.define(:version => 20101014084829) do
 
   create_table "feeds", :force => true do |t|
     t.string   "title"
     t.text     "description"
-    t.string   "pubdate"
+    t.string   "link"
+    t.datetime "pubdate"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "link"
   end
 
 end

@@ -9,7 +9,7 @@
 - for feed in @feeds
   %p
     %b= link_to feed.title.force_encoding("UTF-8"), feed.link
-    = feed.pubdate
+    = feed.pubdate.strftime('%a, %d %b %Y')
     <br/>
     = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
    

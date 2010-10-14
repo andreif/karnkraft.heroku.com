@@ -9,7 +9,7 @@ xml.rss :version => "2.0" do
       xml.item do
         xml.title feeds.title
         xml.description feeds.description
-        xml.pubDate feeds.pubdate
+        xml.pubDate feeds.pubdate.strftime('%a, %d %b %Y %H:%M:%S %z')
         xml.link feeds.link
         xml.guid feeds.link
       end

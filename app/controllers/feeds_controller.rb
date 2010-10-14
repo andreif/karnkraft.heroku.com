@@ -56,7 +56,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
             end
             # t = Iconv.conv 'UTF-8', 'UTF-16', t
           when 'SvE'
-            p = Time.parse(p).strftime('%a, %d %b %Y %H:%M:%S %z')#.to_s
+            #p = Time.parse(p).strftime('%a, %d %b %Y %H:%M:%S %z')#.to_s
         end
         if "#{t} #{d}" =~ /reaktor|rnkraft/i
           #@items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
@@ -66,7 +66,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
             #@feed.description = "<![CDATA[#{a.first}: #{d}]]>"
             @feed.description = "#{a.first}: #{d}"
             @feed.link = l
-            @feed.pubdate = p
+            @feed.pubdate = Time.parse(p)
             @feed.save
           end
           # @feed = Feed.new(params[:feed])
