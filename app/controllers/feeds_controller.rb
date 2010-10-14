@@ -19,7 +19,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
   end
   
   def update
-    @items = []
+    @feeds = []
     clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
     @existed = Feed.all.collect(&:link)
     SOURCES.split.each_slice(2) do |a|
@@ -61,13 +61,14 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
         if "#{t} #{d}" =~ /reaktor|rnkraft/i
           #@items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
           unless @existed.include? l
-            @feed = Feed.new
-            @feed.title = t
+            feed = Feed.new
+            feed.title = t
             #@feed.description = "<![CDATA[#{a.first}: #{d}]]>"
-            @feed.description = "#{a.first}: #{d}"
-            @feed.link = l
-            @feed.pubdate = Time.parse(p)
-            @feed.save
+            feed.description = "#{a.first}: #{d}"
+            feed.link = l
+            feed.pubdate = Time.parse(p)
+            feed.save
+            @feeds << feed
           end
           # @feed = Feed.new(params[:feed])
           #   if @feed.save
@@ -77,18 +78,14 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
           #     render :action => 'new'
           #   end
         else
-          @items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
+          #@items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
         end
       end
     end
-    # @feed = Feed.find(params[:id])
-    # if @feed.update_attributes(params[:feed])
-    #   flash[:notice] = "Successfully updated feed."
-    #   redirect_to @feed
-    # else
-    #   render :action => 'edit'
-    # end
-    redirect_to :controller => 'feeds', :action => 'index'
+    @feeds = @feeds.sort_by(&:pubdate).reverse
+    @sources = SOURCES
+    render :action => 'index'
+    #redirect_to :controller => 'feeds', :action => 'index'
   end
   
   def destroy

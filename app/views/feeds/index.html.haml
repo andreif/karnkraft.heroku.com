@@ -4,12 +4,12 @@
     %img{:src => 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/24px-Feed-icon.svg.png'}
   Kärnkraft Nyheter
 
-%p= link_to 'Update', '/feeds/update'
+%p= #link_to 'Update', '/feeds/update'
 
 - for feed in @feeds
   %p
     %b= link_to feed.title.force_encoding("UTF-8"), feed.link
-    = feed.pubdate.strftime('%a, %d %b %Y')
+    %span{:style=>'color:gray;font-size:0.8em;'}= feed.pubdate.strftime('%a, %d %b %Y')
     <br/>
     = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
    
