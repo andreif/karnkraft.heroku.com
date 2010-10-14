@@ -27,6 +27,7 @@ class FeedsController < ApplicationController
     #ic = Iconv.new('ISO-8859-1', 'UTF-8')
     # ic = Iconv.new('ASCII-8BIT', 'UTF-8')
     clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
+    @existed = Feed.all.collect(&:link)
     '
 DN http://www.dn.se/m/rss/toppnyheter
 DN http://www.dn.se/ekonomi/m/rss
@@ -76,7 +77,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
         end
         if "#{t} #{d}" =~ /reaktor|k.rnkraft/
           #@items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
-          unless Feed.where(:link => l).exists?
+          unless @existed.include? l
             @feed = Feed.new
             @feed.title = t
             #@feed.description = "<![CDATA[#{a.first}: #{d}]]>"
