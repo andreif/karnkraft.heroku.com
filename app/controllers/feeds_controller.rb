@@ -89,7 +89,7 @@ SvE http://www.svenskenergi.se/sv/system/RSS/
   end
   
   def destroy
-    @feeds = Feed.destroy_all
+    #@feeds = Feed.destroy_all
     redirect_to :controller => 'feeds', :action => 'index'#, :notice => "Successfully destroyed feeds."
   end
   
