@@ -59,7 +59,7 @@ Exp http://expressen.se/rss/nyheter
           when 'SvE'
             #p = Time.parse(p).strftime('%a, %d %b %Y %H:%M:%S %z')#.to_s
         end
-        if "#{t} #{d}" =~ /reaktor|k\xC3\xA4rn(avfall|kraft|tekn|br\xC3\xA4ns)/i
+        if "#{t} #{d}" =~ /reaktor|k\xC3\xA4rn(avfall|energ|kraft|tekn|br\xC3\xA4ns)/i
           #@items << {title:t, description:"#{a.first}: #{d}", link:l, pubdate:p, all:item.inner_html}
           unless @existed.include? l
             feed = Feed.new
