@@ -44,7 +44,7 @@ Exp http://expressen.se/rss/nyheter
         p.search('a').remove
         p.search('.date').remove
         
-        feed.description = "<![CDATA[#{cat}<div style=''>#{com}</div> #{p.inner_html}]]>"
+        feed.description = "<![CDATA[<div style=''>#{com}</div><p>#{cat}</p> #{p.inner_html}]]>"
         feed.link = l
         feed.feed_type = 'jobs'
         feed.save
