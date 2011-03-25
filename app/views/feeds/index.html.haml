@@ -1,19 +1,38 @@
 - title "Kärnkraft Nyheter", false
+
+#jobs{style:'padding-left: 50px; width:40%; float:right; clear: both'}
+  %h2 Jobb
+  - i=0
+  - for feed in @feeds
+    - next if feed.feed_type != 'jobs'
+    -break if (i+=1) > 20
+    %p
+      %b= link_to feed.title.force_encoding("UTF-8"), feed.link
+      %span{:style=>'color:gray;font-size:0.8em;'}= feed.pubdate.strftime('%a, %d %b %Y')
+      <br/>
+      = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
+
 %h1
   %a{:href => '/feeds.rss'}<
     %img{:src => 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/24px-Feed-icon.svg.png'}
   Kärnkraft Nyheter
 
-%p= #link_to 'Update', '/feeds/update'
+/%p= #link_to 'Update', '/feeds/update'
+
+
+
 
 - i=0
 - for feed in @feeds
+  - next if feed.feed_type == 'jobs'
   -break if (i+=1) > 20
   %p
     %b= link_to feed.title.force_encoding("UTF-8"), feed.link
     %span{:style=>'color:gray;font-size:0.8em;'}= feed.pubdate.strftime('%a, %d %b %Y')
     <br/>
     = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
+
+
 
 %p= "No updates" if @feeds.empty?
    

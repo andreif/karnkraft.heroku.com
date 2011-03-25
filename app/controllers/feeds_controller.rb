@@ -19,6 +19,43 @@ Exp http://expressen.se/rss/nyheter
     @sources = SOURCES
   end
   
+  def jobs
+    @feeds = Feed.where('feed_type = ?', 'jobs').sort_by(&:pubdate).reverse
+    @sources = SOURCES
+    @jobs = true
+    render 'index'
+  end
+  
+  def update_jobs
+    @feeds = []
+    @existed = Feed.where('feed_type = ?', 'jobs').collect(&:link)
+    clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
+    doc = open('http://www.nyteknik.se/jobb/sokresultat/?searchString=k%C3%A4rnkraft*') { |f| Hpricot(f.read) }
+    doc.search('.job-results ol li').each do |p|
+      l = p.search('h2 a').first.attributes['href']
+      unless @existed.include? l
+        feed = Feed.new
+        feed.title = p.search('h2 a').first.inner_text
+        feed.pubdate = Time.parse(p.search('.date').first.inner_text)
+        cat = p.search('p .category')
+        p.search('h2').remove
+        com = p.search('a')
+        p.search('p .category').remove
+        p.search('a').remove
+        p.search('.date').remove
+        
+        feed.description = "<![CDATA[#{cat}<div style=''>#{com}</div> #{p.inner_html}]]>"
+        feed.link = l
+        feed.feed_type = 'jobs'
+        feed.save
+        @feeds << feed
+      end
+    end
+    @feeds = @feeds.sort_by(&:pubdate).reverse
+    @sources = 'http://www.nyteknik.se/jobb/sokresultat/?searchString=k%C3%A4rnkraft*'
+    render :action => 'index'
+  end
+  
   def update
     @feeds = []
     clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
@@ -68,6 +105,7 @@ Exp http://expressen.se/rss/nyheter
             feed.description = "#{a.first}: #{d}"
             feed.link = l
             feed.pubdate = Time.parse(p)
+            feed.feed_type = 'news'
             feed.save
             @feeds << feed
           end
