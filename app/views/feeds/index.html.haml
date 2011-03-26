@@ -1,15 +1,18 @@
 - title "Kärnkraft Nyheter", false
 
-#jobs{style:'padding-left: 50px; width:40%; float:right; clear: both'}
-  %h2 Jobb
+#jobs{style:'padding-left: 50px; width:30%; float:right'}
+  %h1
+    %a{:href => '/jobs.rss'}<
+      %img{:src => 'http://upload.wikimedia.org/wikipedia/commons/thumb/4/43/Feed-icon.svg/24px-Feed-icon.svg.png'}
+    Kärnkraft Jobb
   - i=0
   - for feed in @feeds
     - next if feed.feed_type != 'jobs'
     -break if (i+=1) > 20
-    %p
+    %div
+      %br
       %b= link_to feed.title.force_encoding("UTF-8"), feed.link
-      %span{:style=>'color:gray;font-size:0.8em;'}= feed.pubdate.strftime('%a, %d %b %Y')
-      <br/>
+      %div{:style=>'color:gray;font-size:0.8em;'}= feed.pubdate.strftime('%a, %d %b %Y')
       = raw feed.description.gsub('<![CDATA[','').gsub(']]>','').force_encoding("UTF-8")
 
 %h1
@@ -42,3 +45,5 @@
     %li
       = "%s: " % a.first
       = link_to a.last, a.last
+
+%br{clear:'all'}

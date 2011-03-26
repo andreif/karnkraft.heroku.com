@@ -29,7 +29,7 @@ Exp http://expressen.se/rss/nyheter
   def update_jobs
     @feeds = []
     @existed = Feed.where('feed_type = ?', 'jobs').collect(&:link)
-    clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
+    
     doc = open('http://www.nyteknik.se/jobb/sokresultat/?searchString=k%C3%A4rnkraft*') { |f| Hpricot(f.read) }
     doc.search('.job-results ol li').each do |p|
       l = p.search('h2 a').first.attributes['href']
@@ -44,7 +44,7 @@ Exp http://expressen.se/rss/nyheter
         p.search('a').remove
         p.search('.date').remove
         
-        feed.description = "<![CDATA[<div style=''>#{com}</div><p>#{cat}</p> #{p.inner_html}]]>"
+        feed.description = "<div style=''>#{com}</div><p>#{cat}</p> #{p.inner_html}"
         feed.link = l
         feed.feed_type = 'jobs'
         feed.save

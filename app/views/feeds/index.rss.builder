@@ -1,15 +1,22 @@
 xml.instruct! :xml, :version => "1.0" 
 xml.rss :version => "2.0" do
   xml.channel do
-    xml.title "Kärnkraft Nyheter"
     xml.description ""
-    xml.link feeds_url(:rss)
+    if @jobs
+      xml.title 'Kärnkraft Jobb'
+      xml.link feeds_url(:rss)
+    else
+      xml.title 'Kärnkraft Nyheter'
+      xml.link feeds_url(:rss)
+    end
+    
+    clean_rss = Proc.new { |s| CGI.unescapeHTML(s.gsub('<![CDATA[','').gsub(']]>','')) }
     
     for feeds in @feeds
       next if @jobs ^ (feeds.feed_type == 'jobs')
       xml.item do
         xml.title feeds.title
-        xml.description feeds.description
+        xml.description feeds.description#raw ("<![CDATA[%s]]>" % feeds.description)#clean_rss.call(feeds.description)
         xml.pubDate feeds.pubdate.strftime('%a, %d %b %Y %H:%M:%S %z')
         xml.link feeds.link
         xml.guid feeds.link
