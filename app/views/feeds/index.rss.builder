@@ -6,6 +6,8 @@ xml.rss :version => "2.0" do
     xml.link feeds_url(:rss)
     
     for feeds in @feeds
+      - next if @jobs and feeds.feed_type != 'jobs'
+      - next if not @jobs and feeds.feed_type == 'jobs'
       xml.item do
         xml.title feeds.title
         xml.description feeds.description
