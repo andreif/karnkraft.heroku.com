@@ -1,0 +1,28 @@
+devcenter.heroku.com/articles/rails3
+
+gem install heroku
+
+gem 'thin', group:[:production]
+gem 'foreman', :group => :development
+gem 'sqlite3', group:[:development, :test]
+gem 'pg', group:[:production]
+
+heroku create polisen --stack cedar
+heroku addons:add newrelic:standard
+heroku addons:add logging:basic
+heroku addons:add memcache:5mb
+heroku addons:add mongohq:free
+
+heroku addons:add pgbackups:basic
+
+# heroku addons:add shared-database
+# heroku addons:add redistogo:nano
+
+https://api.heroku.com/myapps/polisen/resources
+
+heroku config:add MYVAR=42
+
+Procfile
+web: bundle exec rails server thin -p $PORT
+
+git push heroku master
