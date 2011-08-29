@@ -1,5 +1,30 @@
 # A sample Guardfile
 # More info at https://github.com/guard/guard#readme
+require 'guard/guard'
+
+module ::Guard
+  class GitPushOrigin < ::Guard::Guard
+    def run_all
+      system 'git push origin'
+      true
+    end
+
+    def run_on_change(paths)
+      system 'git push origin'
+      if paths.find { |e| e =~ /master$/ }
+        Dir['.git/refs/remotes/*'].each do |remote|
+          remote = File.basename(remote)
+          system "git push #{remote} master" unless remote == 'origin'
+        end
+      end
+      true
+    end
+  end
+end
+
+guard 'git_push_origin' do
+  watch(%r{^\.git/refs/heads/.+$})
+end
 
 
 guard 'spork', rspec_env:{'RAILS_ENV'=>'test'}, cucumber_env:{'RAILS_ENV'=>'test'} do # , bundler: false, cucumber: false
