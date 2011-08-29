@@ -5,7 +5,7 @@ source 'http://rubygems.org'
 gem 'thin'#, group:[:production]
 gem 'foreman', :group => :development
 
-gem 'rails', '>= 3.1.0.rc5'
+gem 'rails', '>= 3.1.0.rc8'
 gem 'sass-rails', ">= 3.1.0.rc"
 gem 'coffee-script'
 gem 'uglifier'
@@ -13,7 +13,7 @@ gem 'jquery-rails'
 
 gem 'haml', '>= 3.1.1'
 gem 'haml-rails', '>= 0.3.4', :group => :development
-#gem 'formtastic'
+# gem 'formtastic'
 
 gem 'sqlite3', group:[:development, :test]
 gem 'pg', group:[:production]
@@ -22,6 +22,7 @@ gem 'bson_ext', '>= 1.3.1'
 gem 'mongoid_auto_inc'
 
 gem 'nokogiri'
+gem 'hpricot'
 
 # Authentication and Authorization
 # gem "devise", ">= 1.4.2"
