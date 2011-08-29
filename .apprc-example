@@ -1,0 +1,19 @@
+# env vars for API keys
+
+export FACEBOOK_APP_ID=
+export FACEBOOK_APP_SECRET=
+
+export TWITTER_CONSUMER_KEY=
+export TWITTER_CONSUMER_SECRET=
+
+export LINKEDIN_CONSUMER_KEY=
+export LINKEDIN_CONSUMER_SECRET=
+
+# export S3_KEY=mykey
+# export S3_SECRET=mysecret
+
+export MAILER_SENDER=email@example.com
+export MAILER_HOST=yourhost.com
+
+# heroku config:add FACEBOOK_APP_ID=$FACEBOOK_APP_ID
+
