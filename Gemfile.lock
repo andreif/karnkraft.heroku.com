@@ -103,6 +103,7 @@ GEM
       haml (~> 3.0)
       railties (~> 3.0)
     hike (1.2.1)
+    hpricot (0.8.4)
     i18n (0.6.0)
     jquery-rails (1.0.13)
       railties (~> 3.0)
@@ -227,13 +228,14 @@ DEPENDENCIES
   guard-spork
   haml (>= 3.1.1)
   haml-rails (>= 0.3.4)
+  hpricot
   jquery-rails
   mongoid (>= 2.0.2)
   mongoid-rspec (>= 1.4.4)
   mongoid_auto_inc
   nokogiri
   pg
-  rails (>= 3.1.0.rc5)
+  rails (>= 3.1.0.rc8)
   rb-fsevent
   rspec-rails (>= 2.6.1)
   sass-rails (>= 3.1.0.rc)
