@@ -1,3 +1,15 @@
-%h1 Andrei Fokau ~ web.apps
-%ol
+- title "Home page"
+%h1 Home
+
+%h3 Recent notebook entries
+%ul.posts
+  - for post in Post.all.first(3)
+    %li.post
+      %b= link_to post.title, post
+      = post.date.strftime(' - %b %d, %Y')
+
+
+
+%h3 Nested apps
+%ul
   %li= link_to 'Kärnkraft Nyheter', '/feeds'
