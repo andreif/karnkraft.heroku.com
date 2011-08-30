@@ -1,5 +1,6 @@
 Highflux::Application.routes.draw do
   
+  resources :posts
   
   resources :feeds, :only => [:index, :update, :update_jobs, :destroy]
   get 'feeds/:action(.:format)' => 'feeds'
