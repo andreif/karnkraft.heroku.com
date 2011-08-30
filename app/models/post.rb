@@ -35,7 +35,19 @@ class Post
   end
   
   def title
-    name.gsub('-',' ')[11..-1]
+    if text.strip =~ /^\# ([^\n]+)/
+      $1
+    else
+      name.gsub('-',' ')[11..-1]
+    end
+  end
+  
+  def body
+    if text.strip =~ /(\s*\# [^\n]+)/
+      text[$1.length+1..-1]
+    else
+      text
+    end
   end
   
   def to_param
