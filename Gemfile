@@ -14,6 +14,8 @@ gem 'jquery-rails'
 gem 'haml', '>= 3.1.1'
 gem 'haml-rails', '>= 0.3.4', :group => :development
 # gem 'formtastic'
+gem 'redcarpet'
+gem 'albino'
 
 gem 'sqlite3', group:[:development, :test]
 gem 'pg', group:[:production]

@@ -1,0 +1,8 @@
+
+%h1= title 'Notebook'
+
+%ul.posts
+  - for post in @posts
+    %li.post
+      %b= link_to post.title, post
+      = post.date.strftime(' - %b %d, %Y')

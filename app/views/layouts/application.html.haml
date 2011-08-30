@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %title
+      = content_for?(:title) ? yield(:title) : 'web.apps'
+      by Andrei Fokau
+    = stylesheet_link_tag "application"
+    = javascript_include_tag 'application'
+    = csrf_meta_tag
+    = yield(:head)
+  %body
+    #container
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}"
+        
+      %ul.nav_top
+        %li= link_to 'Home', root_url
+        %li= link_to 'Notebook', posts_url
+        
+      = content_tag :h1, yield(:title) if show_title?
+      = yield
