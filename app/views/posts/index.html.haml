@@ -1,8 +1,11 @@
 
 %h1= title 'Notebook'
 
+- if @posts.empty? or @posts.nil?
+  No posts found
 %ul.posts
   - for post in @posts
     %li.post
       %b= link_to post.title, post
       = post.date.strftime(' - %b %d, %Y')
+  

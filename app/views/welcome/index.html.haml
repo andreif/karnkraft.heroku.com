@@ -2,8 +2,10 @@
 %h1 Home
 
 %h3 Recent notebook entries
+- if @posts.empty? or @posts.nil?
+  No posts found
 %ul.posts
-  - for post in Post.all.first(3)
+  - for post in @posts
     %li.post
       %b= link_to post.title, post
       = post.date.strftime(' - %b %d, %Y')
