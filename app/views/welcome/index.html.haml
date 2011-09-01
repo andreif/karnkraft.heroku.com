@@ -1,9 +1,8 @@
-- title "Home page"
 %h1 Home
 
-%h3 Recent notebook entries
+%h3 Recent notes
 - if @posts.empty? or @posts.nil?
-  No posts found
+  No published notes
 %ul.posts
   - for post in @posts
     %li.post
@@ -12,6 +11,6 @@
 
 
 
-%h3 Nested apps
+%h3 Some services
 %ul
   %li= link_to 'Kärnkraft Nyheter', '/feeds'

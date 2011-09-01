@@ -1,3 +1,4 @@
+http://thelucid.com/2008/12/02/git-setting-up-a-remote-repository-and-doing-an-initial-push/
 http://joemaller.com/908/how-to-install-git-on-a-shared-host/
 
 
